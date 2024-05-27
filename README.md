@@ -56,13 +56,13 @@ IoT 개발자 미니프로젝트 리포지토리
 - 라즈베리파이 셋팅
     1. RPi 기본 구성 - RPi + MicroSD + Power
     2. RPi 기본 셋팅
-        [x] 최신 업그레이드
-        [x] 한글화
-        [x] 키보드 변경
-        [x] 화면사이즈 변경(RealVNC)
-        [x] Pi Apps 앱설치 도우미 앱
-        [x] Github, Desktop, VS Code
-        [x] 네트워크 확인
+        - [x] 최신 업그레이드
+        - [x] 한글화
+        - [x] 키보드 변경
+        - [x] 화면사이즈 변경(RealVNC)
+        - [x] Pi Apps 앱설치 도우미 앱
+        - [x] Github, Desktop, VS Code
+        - [x] 네트워크 확인
         - RealVNC Server 자동실행 설정
 
 - 스마트홈 연동 클래스 미니프로젝트
@@ -70,19 +70,20 @@ IoT 개발자 미니프로젝트 리포지토리
 
 ## 4일차
 - 라즈베리파이 IoT장비 설치
-    [x] 라즈베리파이 카메라
-    [x] GPIO HAT
-    [x] 브레드보드와 연결
-    [x] RGB LED 모듈
+    - [x] 라즈베리파이 카메라
+    - [x] GPIO HAT
+    - [ ] DHT11 설치
+    - [x] 브레드보드와 연결
+    - [x] RGB LED 모듈
         - V - 5V
         - R - GPIO4 연결
         - B - GPIO5 연결
         - G - GPIO6 연결
-    [-] 서브모터
+    - [ ] 서브모터
 
 ## 5일차
 - 라즈베리파이 IoT장비 설치
-    [x] DHT11 설치
+    - [x] DHT11 설치
         - GND - GND 8개중 아무대나 연결
         - vcc - 5v 연결
         - s - GPIO18번 연결
@@ -94,7 +95,7 @@ IoT 개발자 미니프로젝트 리포지토리
 
 ## 6일차, 7일차
 - 네트워크 대공사
-    [x] 개인공유기, PC, 라즈베리파이
+    - [x] 개인공유기, PC, 라즈베리파이
     
 - 스마트홈 연동 클래스 미니프로젝트
     - 온습도 센서, RGB LED
@@ -107,10 +108,26 @@ IoT 개발자 미니프로젝트 리포지토리
     - **MQTT** - 가장 편리! AWS IoT, Azure IoT 클라우드 산업계표준으로 사용
 
 - MQTT 통신
-    [x] Mosquitto Broker 설치
+    - [x] Mosquitto Broker 설치
         - mosquitto.conf : listner 1883 0.0.0.0, allow_anonymous true
         - 방화벽 인바운드 열기
-    [x] RPi : paho-mqtt 패키지 설치, 송신(publisher)
-    - Win : MQTT.NET Nuget패키지 설치, 수신(subscribers)
+    - [x] RPi : paho-mqtt 패키지 설치, 송신(publisher)
+    - [ ] Win/C# : MQTT Nuget패키지 설치, 수신(subscribers)
+        - M2Mqtt : 가볍게 쓸수 있음. 업데이트가 안됨.
+        - MQTTNet : MS에서 개발, 무겁다. 최신까지 업데이트 잘됨
 
-    
+
+## 9일차
+- 스마트홈 연동 클래스 미니프로젝트
+    - [x] WPF 수신 MQTT데이터 DB로 저장
+    - [x] MQTT데이터 실시간 모니터링 - 온도
+
+
+## 10일차
+- 스마트홈 연동 클래스 미니프로젝트
+    - [ ] MQTT데이터 실시간 모니터링 - 습도
+    - [ ] MQTT로 RPi 제어(LED제어)
+    - [ ] WPF MQTT데이터 히스토리 확인
+
+- 조별 미니프로젝트 발표
+    - 1~5조 까지
