@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         xmlns:local="clr-namespace:teamproject4"
         mc:Ignorable="d"
         Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None"
@@ -11,7 +12,6 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
-
 
     <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
@@ -45,46 +45,52 @@
                         </Border>
 
                         <!-- Menu Titles-->
-                        <TextBlock Text="분리수거 관리 프로그램" Foreground="White" FontSize="22" FontWeight="SemiBold"
+                        <TextBlock Text="분리수거 관리 프로그램" Foreground="White" FontSize="16" FontWeight="SemiBold"
                                    DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
                         <TextBlock Text="Iot2조" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold"
                                    DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
 
+                        <!-- Button StackPanel for LOGIN and LOGOUT -->
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="5 10 0 10">
+                            <TextBlock x:Name="TxtLogin" Text="LOGIN" Foreground="Silver" FontSize="10"  Margin="0 0 10 0" />
+                            <TextBlock Text="/" Foreground="White" FontSize="10" FontWeight="Bold" Margin="0 0 10 0"
+                                       IsHitTestVisible="False"/>
+                            <TextBlock x:Name="TxtLogout" Text="LOGOUT" Foreground="White" FontSize="10" 
+                                        Cursor="Hand"  MouseLeftButtonUp="TxtLogout_MouseLeftButtonUp"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="5 10 0 10">
+                            <TextBlock x:Name="TxtOn" Text="ON" Foreground="White" FontSize="10"  Margin="0 0 10 0"
+                                        Cursor="Hand"  MouseLeftButtonUp="TxtOn_MouseLeftButtonUp"/>
+                            <TextBlock Text="/" Foreground="White" FontSize="10" FontWeight="Bold" Margin="0 0 10 0"
+                                        IsHitTestVisible="False"/>
+                            <TextBlock x:Name="TxtOff" Text="OFF" Foreground="White" FontSize="10" 
+                                        Cursor="Hand"  MouseLeftButtonUp="TxtOff_MouseLeftButtonUp"/>
+                        </StackPanel>
                         <!-- Menu Seprator-->
-                        <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc" />
+                        <Separator Margin="15" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc" />
 
                         <!-- Menu Buttons -->
                         <StackPanel DockPanel.Dock="Top">
-                            <Button Style="{StaticResource menuButton}">
+                            <Button x:Name="BtnHome" Style="{StaticResource menuButton}" Click="BtnHome_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuBottomIcon}"/>
                                     <TextBlock Text="Home" />
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button x:Name="BtnGraph" Style="{StaticResource menuButton}" Click="BtnGraph_Click" >
                                 <StackPanel Orientation="Horizontal">
                                     <icon:PackIconMaterial Kind="ChartAreaspline" Style="{StaticResource menuBottomIcon}"/>
                                     <TextBlock Text="Graph" />
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button x:Name="BtnManagement" Style="{StaticResource menuButton}" Click="BtnManagement_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuBottomIcon}"/>
-                                    <TextBlock Text="Management" />
+                                    <icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuBottomIcon}" Foreground="White"/>
+                                    <TextBlock Text="Management" Foreground="White" />
                                 </StackPanel>
                             </Button>
-
-
-                            <Button Style="{StaticResource menuButton}">
-                                <StackPanel Orientation="Horizontal">
-                                    <icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuBottomIcon}"/>
-                                    <TextBlock Text="Logout" />
-                                </StackPanel>
-                            </Button>
-
-
                         </StackPanel>
                     </DockPanel>
                 </Border>
@@ -100,30 +106,20 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <!-- Search TextBox -->
-                <Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                               Panel.ZIndex="1" Text="Serch here..."
-                               Visibility="{Binding ElementName=txtSearch, Converter={StaticResource BoolToVis}}"/>
-                    
-                    <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"/>
 
-                    <icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
-                                           Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
-                </Grid>
-                
+
                 <!-- Top Buttons -->
-                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
-                    <icon:PackIconMaterial Kind="Cog"/>
+
+                <Button x:Name="BtnExit" Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc"
+                HorizontalAlignment="Right" Click="BtnExit_Click" Grid.Row="0" Grid.Column="2">
+                    <icon:PackIconVaadinIcons Kind="Exit"/>
                 </Button>
 
-                <Button Style="{StaticResource topButton}" Margin="0 0 55 0" HorizontalAlignment="Right">
-                    <icon:PackIconMaterial Kind="Bell"/>
-                </Button>
+
 
                 <!-- Page Title -->
                 <TextBlock Text="Members" Grid.Row="1" FontWeight="SemiBold" Margin="0 20 0 0"
@@ -141,11 +137,10 @@
                 <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10"/>
 
                 <!-- Tap Buttons -->
-                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0">
-                    <Button Content="Club Staff" Style="{StaticResource tabButton}" BorderBrush="#784ff2"/>
-                    <Button Content="Players" Style="{StaticResource tabButton}"/>
-                    <Button Content="Archived" Style="{StaticResource tabButton}"/>
-                </StackPanel>
+                <Grid Grid.Row="2">
+                    <lvc:PieChart Series="{Binding PieSeries}"/>
+                    <lvc:CartesianChart Series="{Binding ColumnSeries}" XAxes="{Binding XAxes}" />
+                </Grid>
 
                 <!-- Counter Title -->
                 <TextBlock Text="68 Club Staff" Grid.Row="4" FontSize="18" FontWeight="SemiBold"
@@ -164,13 +159,13 @@
                     <TextBox x:Name="txtFilter" Style="{StaticResource textboxFilter}"/>
 
                 </Grid>
-                <CheckBox Style="{DynamicResource CheckBoxStyle1}" Grid.Row="6" Content="asdasd"/>
                 <!-- Members Datagrid -->
                 <DataGrid x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" 
                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                          RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5">
+                          RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" >
+
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
+                        <DataGridCheckBoxColumn CanUserResize="True" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                             <DataGridCheckBoxColumn.HeaderTemplate>
                                 <DataTemplate>
                                     <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
@@ -215,7 +210,7 @@
 
                     </DataGrid.Columns>
                 </DataGrid>
-                
+
                 <!-- Pagination Section -->
                 <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1"
                         CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
@@ -235,7 +230,7 @@
                         <Button Style="{StaticResource pagingButton}" Content="7"/>
                         <Button Style="{StaticResource pagingButton}" Content="8"/>
                         <Button Style="{StaticResource pagingButton}" Content="9"/>
-                        
+
                         <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
 
                         <Button Style="{StaticResource pagingButton}">
@@ -244,11 +239,7 @@
 
                     </StackPanel>
                 </Border>
-
-
-
             </Grid>
-
         </Grid>
     </Border>
 </Window>
